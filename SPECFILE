@@ -1,0 +1,7 @@
+title: Kerberos 5 Salt Formula
+description: Salt formula for installing components of Kerberos
+root_path: krb5
+components:
+  - title: KDC
+    description: Key distribution center for KRB5
+    sls_path: krb5.kdc

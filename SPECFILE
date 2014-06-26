@@ -5,6 +5,3 @@ components:
   - title: Kerberos KDC
     description: Key distribution center for KRB5
     sls_path: krb5.kdc
-  - title: Kerberos Workstation
-    description: Key distribution center for KRB5
-    sls_path: krb5

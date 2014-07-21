@@ -1,2 +1,2 @@
-{% from 'krb5/settings.sls' import krb5 with context %}
+{%- from 'krb5/settings.sls' import krb5 with context %}
 */admin@{{ krb5.realm }} *

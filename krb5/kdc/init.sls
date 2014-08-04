@@ -1,3 +1,5 @@
+{% from 'krb5/settings.sls' import krb5 with context %}
+
 include:
  - krb5
 
@@ -55,7 +57,7 @@ kadmin:
 gen_admin_keytab:
   cmd:
     - run
-    - name: 'kadmin.local -q "xst -norandkey -k /root/admin.keytab kadmin/admin@DEV.SYNTHESYSCLOUD.COM"'
+    - name: 'kadmin.local -q "xst -norandkey -k /root/admin.keytab kadmin/admin@{{ krb5.realm }}"'
     - unless: 'test -f /root/admin.keytab'
     - require:
       - service: krb5kdc

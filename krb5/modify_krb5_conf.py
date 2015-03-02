@@ -1,3 +1,4 @@
+{%- from 'krb5/settings.sls' import krb5 with context -%}
 #!/usr/bin/env python
 
 from ConfigParser import ConfigParser

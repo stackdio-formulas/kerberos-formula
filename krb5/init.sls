@@ -14,3 +14,16 @@ krb5-workstation:
     - require:
       - pkg: krb5-libs
       - pkg: krb5-workstation
+    - replace: false
+
+modify_krb5_conf:
+  cmd:
+    - script
+    - source: salt://krb5/modify_krb5_conf.sh
+    - template: jinja
+    - user: root
+    - group: root
+    - require:
+      - pkg: krb5-libs
+      - pkg: krb5-workstation
+    - onlyif: "[ -f /etc/krb5.conf ]"

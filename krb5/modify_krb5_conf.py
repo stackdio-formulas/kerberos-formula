@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#{%- from 'krb5/settings.sls' import krb5 with context -%}
+{%- from 'krb5/settings.sls' import krb5 with context -%}
 
 import re
 from ConfigParser import ConfigParser

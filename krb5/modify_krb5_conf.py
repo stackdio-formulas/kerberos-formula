@@ -5,8 +5,8 @@ import re
 from ConfigParser import ConfigParser
 from StringIO import StringIO
 
-READ_FILE_PATH = '/home/ch/Tmp/krb5.conf.old'
-WRITE_FILE_PATH = '/home/ch/Tmp/krb5.conf.new'
+READ_FILE_PATH = '/etc/krb5.conf'
+WRITE_FILE_PATH = '/etc/krb5.conf'
 
 
 def main():

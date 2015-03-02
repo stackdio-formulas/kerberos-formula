@@ -19,7 +19,7 @@ krb5-workstation:
 modify_krb5_conf:
   cmd:
     - script
-    - source: salt://krb5/modify_krb5_conf.sh
+    - source: salt://krb5/modify_krb5_conf.py
     - template: jinja
     - user: root
     - group: root

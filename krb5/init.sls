@@ -14,6 +14,7 @@ krb5-workstation:
     - require:
       - pkg: krb5-libs
       - pkg: krb5-workstation
+      - cmd: modify_krby5_conf
     - replace: false
 
 modify_krb5_conf:

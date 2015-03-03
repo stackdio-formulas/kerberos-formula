@@ -17,7 +17,7 @@ move_old_conf:
   cmd:
     - run
     - name: 'mv /etc/krb5.conf /etc/krb5.conf.d/old_krb5.conf'
-    - onlyif: 'test -f /etc/krb5.conf'
+    - onlyif: 'test -f /etc/krb5.conf && ! test -f /etc/krb5.conf.d/old_krb5.conf'
     - require:
       - file: /etc/krb5.conf.d
 

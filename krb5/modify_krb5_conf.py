@@ -1,5 +1,5 @@
-#!/usr/bin/env python
 {%- from 'krb5/settings.sls' import krb5 with context -%}
+#!/usr/bin/env python
 
 import re
 from ConfigParser import ConfigParser
@@ -57,7 +57,8 @@ def edit_config_body(body):
 
     # Add logging section
     LOGGING = 'logging'
-    cp.add_section(LOGGING)
+    if LOGGING not in cp.sections():
+        cp.add_section(LOGGING)
     cp.set(LOGGING, 'kdc', 'FILE:/var/log/krb5kdc.log')
     cp.set(LOGGING, 'admin_server', 'FILE:/var/log/kadmin.log')
     cp.set(LOGGING, 'default', 'FILE:/var/log/krb5lib.log')

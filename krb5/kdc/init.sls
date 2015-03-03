@@ -9,6 +9,7 @@ krb5-server:
     - require:
       - pkg: krb5-libs
       - pkg: krb5-workstation
+      - file: /etc/krb5.conf
 
 krb_config:
   file:
@@ -25,7 +26,7 @@ krb_config:
 krb_db:
   cmd:
     - run
-    - name: '(echo; echo) | kdb5_util create -s'
+    - name: '(echo; echo) | kdb5_util create -s -r {{ krb5.realm }}'
     - unless: 'test -f /var/kerberos/krb5kdc/principal'
     - require:
       - file: krb_config
@@ -57,7 +58,7 @@ kadmin:
 gen_admin_keytab:
   cmd:
     - run
-    - name: 'kadmin.local -q "xst -norandkey -k /root/admin.keytab kadmin/admin@{{ krb5.realm }}"'
+    - name: 'kadmin.local -q "xst -norandkey -k /root/admin.keytab kadmin/admin@{{ krb5.realm }}" -r {{ krb5.realm }}'
     - unless: 'test -f /root/admin.keytab'
     - require:
       - service: krb5kdc

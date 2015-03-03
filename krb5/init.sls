@@ -16,12 +16,12 @@ krb5-workstation:
 move_old_conf:
   cmd:
     - run
-    - name: 'mv /etc/krb5.conf /etc/krb5.conf.d/old_krb5.conf'
-    - onlyif: 'test -f /etc/krb5.conf && ! test -f /etc/krb5.conf.d/old_krb5.conf'
+    - name: 'mv /etc/krb5.conf /etc/krb5.conf.d/old_krb5_conf'
+    - onlyif: 'test -f /etc/krb5.conf && ! test -f /etc/krb5.conf.d/old_krb5_conf'
     - require:
       - file: /etc/krb5.conf.d
 
-/etc/krb5.conf.d/stackdio_krb5.conf:
+/etc/krb5.conf.d/stackdio_krb5_conf:
   file.managed:
     - source: salt://krb5/etc/krb5.conf.d/stackdio_krb5.conf
     - mode: 644
@@ -38,4 +38,4 @@ move_old_conf:
     - user: root
     - group: root
     - require:
-      - file: /etc/krb5.conf.d/stackdio_krb5.conf
+      - file: /etc/krb5.conf.d/stackdio_krb5_conf

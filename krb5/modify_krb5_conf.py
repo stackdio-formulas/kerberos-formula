@@ -52,8 +52,8 @@ def edit_config_body(body):
 
     # Add domain_realm
     DOMAIN_REALM = 'domain_realm'
-    cp.set(DOMAIN_REALM, '{{ krb5.realm }}', '{{ krb5.realm }}')
-    cp.set(DOMAIN_REALM, '.{{ krb5.realm }}', '{{ krb5.realm }}')
+    cp.set(DOMAIN_REALM, '{{ krb5.realm_lower }}', '{{ krb5.realm }}')
+    cp.set(DOMAIN_REALM, '.{{ krb5.realm_lower }}', '{{ krb5.realm }}')
 
     # Add logging section
     LOGGING = 'logging'

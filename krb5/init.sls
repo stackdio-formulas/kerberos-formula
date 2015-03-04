@@ -21,21 +21,12 @@ move_old_conf:
     - require:
       - file: /etc/krb5.conf.d
 
-/etc/krb5.conf.d/stackdio_krb5_conf:
-  file.managed:
-    - source: salt://krb5/etc/krb5.conf.d/stackdio_krb5.conf
-    - mode: 644
-    - user: root
-    - group: root
-    - template: jinja
-    - require:
-      - cmd: move_old_conf
-
 /etc/krb5.conf:
   file.managed:
     - source: salt://krb5/etc/krb5.conf
     - mode: 644
     - user: root
     - group: root
+    - template: jinja
     - require:
-      - file: /etc/krb5.conf.d/stackdio_krb5_conf
+      - cmd: move_old_conf

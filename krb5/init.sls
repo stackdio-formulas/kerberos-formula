@@ -4,6 +4,23 @@ krb5-libs:
 krb5-workstation:
   pkg.installed
 
+/etc/krb5.conf.d:
+  file:
+    - directory
+    - user: root
+    - makedirs: true
+    - require:
+      - pkg: krb5-libs
+      - pkg: krb5-workstation
+
+move_old_conf:
+  cmd:
+    - run
+    - name: 'mv /etc/krb5.conf /etc/krb5.conf.d/old_krb5_conf'
+    - onlyif: 'test -f /etc/krb5.conf && ! test -f /etc/krb5.conf.d/old_krb5_conf'
+    - require:
+      - file: /etc/krb5.conf.d
+
 /etc/krb5.conf:
   file.managed:
     - source: salt://krb5/etc/krb5.conf
@@ -12,19 +29,4 @@ krb5-workstation:
     - group: root
     - template: jinja
     - require:
-      - pkg: krb5-libs
-      - pkg: krb5-workstation
-      - cmd: modify_krb5_conf
-    - replace: false
-
-modify_krb5_conf:
-  cmd:
-    - script
-    - source: salt://krb5/modify_krb5_conf.py
-    - template: jinja
-    - user: root
-    - group: root
-    - require:
-      - pkg: krb5-libs
-      - pkg: krb5-workstation
-    - onlyif: "[ -f /etc/krb5.conf ]"
+      - cmd: move_old_conf

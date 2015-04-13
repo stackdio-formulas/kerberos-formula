@@ -17,5 +17,6 @@ krb5_conf_file:
     - user: root
     - group: root
     - template: jinja
+    - makedirs: true
     - require:
       - cmd: move_old_conf

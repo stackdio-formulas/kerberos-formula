@@ -23,6 +23,16 @@ krb_config:
     - require:
       - pkg: krb5-server
 
+kdc_defaults:
+  file:
+    - managed
+    - name: /etc/default/krb5kdc
+    - source: salt://krb5/etc/default/krb5kdc
+    - file_mode: 644
+    - user: root
+    - group: root
+    - template: jinja
+
 krb_db:
   cmd:
     - run
@@ -30,6 +40,7 @@ krb_db:
     - unless: 'test -f /var/kerberos/krb5kdc/principal'
     - require:
       - file: krb_config
+      - file: kdc_defaults
 
 krb5kdc:
   service:
@@ -40,6 +51,7 @@ krb5kdc:
     - require:
       - cmd: krb_db
       - file: krb_config
+      - file: kdc_defaults
 
 kadmin:
   service:

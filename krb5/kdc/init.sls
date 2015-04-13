@@ -9,7 +9,7 @@ krb5-server:
     - require:
       - pkg: krb5-libs
       - pkg: krb5-workstation
-      - file: /etc/krb5.conf
+      - file: krb5_conf_file
 
 krb_config:
   file:

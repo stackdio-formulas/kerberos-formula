@@ -5,3 +5,7 @@ components:
   - title: Kerberos KDC
     description: Key distribution center for KRB5
     sls_path: krb5.kdc
+
+pillar_defaults:
+  krb5:
+    conf_file: /etc/krb5.conf

@@ -7,7 +7,7 @@ krb5-workstation:
 move_old_conf:
   cmd:
     - run
-    - name: 'mv /etc/krb5.conf /etc/krb5.conf.backup'
+    - name: 'cp /etc/krb5.conf /etc/krb5.conf.backup'
     - onlyif: 'test -f /etc/krb5.conf'
 
 krb5_conf_file:

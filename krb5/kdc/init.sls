@@ -26,8 +26,8 @@ krb_config:
 kdc_defaults:
   file:
     - managed
-    - name: /etc/default/krb5kdc
-    - source: salt://krb5/etc/default/krb5kdc
+    - name: /etc/sysconfig/krb5kdc
+    - source: salt://krb5/etc/sysconfig/krb5kdc
     - file_mode: 644
     - user: root
     - group: root

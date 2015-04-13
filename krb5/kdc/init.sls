@@ -27,7 +27,16 @@ kdc_defaults:
   file:
     - managed
     - name: /etc/sysconfig/krb5kdc
-    - source: salt://krb5/etc/sysconfig/krb5kdc
+    - source: salt://krb5/etc/sysconfig/krb_conf
+    - user: root
+    - group: root
+    - template: jinja
+
+kadmin_defaults:
+  file:
+    - managed
+    - name: /etc/sysconfig/kadmin
+    - source: salt://krb5/etc/sysconfig/krb_conf
     - file_mode: 644
     - user: root
     - group: root
@@ -41,6 +50,7 @@ krb_db:
     - require:
       - file: krb_config
       - file: kdc_defaults
+      - file: kadmin_defaults
 
 krb5kdc:
   service:
@@ -59,6 +69,7 @@ kadmin:
     - enable: true
     - require:
       - service: krb5kdc
+      - file: kadmin_defaults
 
 ##
 # The following will generate a new keytab for the kadmin/admin principal

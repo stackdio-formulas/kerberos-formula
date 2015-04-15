@@ -9,7 +9,7 @@ krb5-server:
     - require:
       - pkg: krb5-libs
       - pkg: krb5-workstation
-      - file: /etc/krb5.conf
+      - file: krb5_conf_file
 
 krb_config:
   file:
@@ -23,6 +23,25 @@ krb_config:
     - require:
       - pkg: krb5-server
 
+kdc_defaults:
+  file:
+    - managed
+    - name: /etc/sysconfig/krb5kdc
+    - source: salt://krb5/etc/sysconfig/krb_conf
+    - user: root
+    - group: root
+    - template: jinja
+
+kadmin_defaults:
+  file:
+    - managed
+    - name: /etc/sysconfig/kadmin
+    - source: salt://krb5/etc/sysconfig/krb_conf
+    - file_mode: 644
+    - user: root
+    - group: root
+    - template: jinja
+
 krb_db:
   cmd:
     - run
@@ -30,6 +49,8 @@ krb_db:
     - unless: 'test -f /var/kerberos/krb5kdc/principal'
     - require:
       - file: krb_config
+      - file: kdc_defaults
+      - file: kadmin_defaults
 
 krb5kdc:
   service:
@@ -40,6 +61,7 @@ krb5kdc:
     - require:
       - cmd: krb_db
       - file: krb_config
+      - file: kdc_defaults
 
 kadmin:
   service:
@@ -47,6 +69,7 @@ kadmin:
     - enable: true
     - require:
       - service: krb5kdc
+      - file: kadmin_defaults
 
 ##
 # The following will generate a new keytab for the kadmin/admin principal

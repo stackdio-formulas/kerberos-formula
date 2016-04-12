@@ -1,2 +1,1 @@
-
-export KRB5_CONFIG={{ pillar.krb5.conf_file }}
+{% if grains.osmajorrelease | int < 7 %}export {% endif %}KRB5_CONFIG={{ pillar.krb5.conf_file }}
